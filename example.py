@@ -9,7 +9,10 @@ from shutil import copyfile
 import acease
 
 
-model_path = "/home/m/msrmnk2/1_calculations/1_ml/4_sticking_probabilities/3_mace_freeze_paper/3_adaptive_sampling/model_training/as0/models_out/model3/model.json"
+model_path = "path/to/model.json"
+python_path = "path/to/python"
+
+initialize_julia(python_path) # pass your python path
 calculator = acease.ACEpotentials(model_path)
 
 # create Simple bulk crystal
