@@ -3,27 +3,26 @@ from ase.calculators.calculator import Calculator
 from ase.constraints import voigt_6_to_full_3x3_stress, full_3x3_to_voigt_6_stress
 
 from julia.api import Julia
-jl = Julia(compiled_modules=False)
 
 from julia import Main
 
-Main.eval("ENV[\"JULIA_CONDAPKG_BACKEND\"] = \"Null\"")
-Main.eval("ENV[\"JULIA_PYTHONCALL_EXE\"] = \"/gpfs/home/m/msrmnk2/mace-mp/bin/python\"")
+def initialize_julia(python_path):
+    jl = Julia(compiled_modules=False)
+    Main.eval("ENV[\"JULIA_CONDAPKG_BACKEND\"] = \"Null\"")
+    Main.eval(f'ENV["JULIA_PYTHONCALL_EXE"] = "{python_path}"')
 
-Main.eval("using PythonCall")
-Main.eval("using ASEconvert")
-Main.eval("using AtomsCalculators")
-Main.eval("using AtomsBase")
-Main.eval("using Unitful")
+    Main.eval("using PythonCall")
+    Main.eval("using ASEconvert")
+    Main.eval("using AtomsCalculators")
+    Main.eval("using AtomsBase")
+    Main.eval("using Unitful")
 
-from julia.AtomsCalculators import potential_energy, forces, virial
+    from julia.AtomsCalculators import potential_energy, forces, virial
 
-pyconv = Main.eval("pyconv(a) = ASEconvert.ase_to_system(a)")
-py = Main.eval("py(a) = PythonCall.Py(a)")
-ustrip = Main.eval("ustrip(a) = Unitful.ustrip.(a)")
-
-
-
+    global pyconv, py, ustrip
+    pyconv = Main.eval("pyconv(a) = ASEconvert.ase_to_system(a)")
+    py = Main.eval("py(a) = PythonCall.Py(a)")
+    ustrip = Main.eval("ustrip(a) = Unitful.ustrip.(a)")
 
 def ACEpotentials(potname):
     Main.eval("using ACEpotentials: load_model")
