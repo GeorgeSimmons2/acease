@@ -1,6 +1,6 @@
 # ACEASE
 
-ASE calculator for ACE models. Compatible with ACEpotentials.jl version 0.8.2.
+[ASE](https://wiki.fysik.dtu.dk/ase/) calculator for ACE models. Compatible with [ACEpotentials.jl](https://github.com/ACEsuit/ACEpotentials.jl) version 0.8.2.
 
 ## Installation
 
