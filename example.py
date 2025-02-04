@@ -36,7 +36,7 @@ for i in range(steps_num):
 	bulk_cu = bulk('Cu', 'fcc', a=cur_val, cubic=False)
 
 	# calc energy
-	bulk_cu.set_calculator(calculator)
+	bulk_cu.calc = calculator
 	cur_Etot = bulk_cu.get_potential_energy()
 
 	#read aims.out and take total energy from it

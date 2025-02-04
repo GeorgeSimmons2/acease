@@ -7,6 +7,8 @@ from julia.api import Julia
 from julia import Main
 
 def initialize_julia(python_path):
+    global pyconv, py, ustrip, potential_energy, forces, virial
+
     jl = Julia(compiled_modules=False)
     Main.eval("ENV[\"JULIA_CONDAPKG_BACKEND\"] = \"Null\"")
     Main.eval(f'ENV["JULIA_PYTHONCALL_EXE"] = "{python_path}"')
@@ -19,7 +21,6 @@ def initialize_julia(python_path):
 
     from julia.AtomsCalculators import potential_energy, forces, virial
 
-    global pyconv, py, ustrip
     pyconv = Main.eval("pyconv(a) = ASEconvert.ase_to_system(a)")
     py = Main.eval("py(a) = PythonCall.Py(a)")
     ustrip = Main.eval("ustrip(a) = Unitful.ustrip.(a)")
