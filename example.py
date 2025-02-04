@@ -6,14 +6,14 @@ import os
 import fileinput
 from shutil import rmtree
 from shutil import copyfile
-import acease
+from acease.ace_calculator import ACEpotentials, initialize_julia
 
 
 model_path = "path/to/model.json"
 python_path = "path/to/python"
 
 initialize_julia(python_path) # pass your python path
-calculator = acease.ACEpotentials(model_path)
+calculator = ACEpotentials(model_path)
 
 # create Simple bulk crystal
 # lattice constant used before: ao=3.6358
