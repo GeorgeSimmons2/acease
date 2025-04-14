@@ -8,7 +8,7 @@ Before installing, make sure Julia and the following Julia packages are installe
 ```
 ACEpotentials
 PythonCall
-ASEconvert
+NQCBase
 AtomsCalculators
 AtomsBase
 Unitful
@@ -19,7 +19,7 @@ The packages within Julia can be installed using the following commands:
 ```julia
 using Pkg
 Pkg.add(url="https://github.com/ACEsuit/ACEpotentials.jl.git", rev="43ae686")
-Pkg.add(["PythonCall", "ASEconvert", "AtomsCalculators", "AtomsBase", "Unitful"])
+Pkg.add(["PythonCall", "NQCBase", "AtomsCalculators", "AtomsBase", "Unitful"])
 ```
 
 

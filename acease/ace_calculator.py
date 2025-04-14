@@ -14,14 +14,15 @@ def initialize_julia(python_path):
     Main.eval(f'ENV["JULIA_PYTHONCALL_EXE"] = "{python_path}"')
 
     Main.eval("using PythonCall")
-    Main.eval("using ASEconvert")
+    Main.eval("import NQCBase")
     Main.eval("using AtomsCalculators")
     Main.eval("using AtomsBase")
     Main.eval("using Unitful")
 
     from julia.AtomsCalculators import potential_energy, forces, virial
 
-    pyconv = Main.eval("pyconv(a) = ASEconvert.ase_to_system(a)")
+    # pyconv = Main.eval("pyconv(a) = ASEconvert.ase_to_system(a)")
+    pyconv = Main.eval("pyconv(a) = NQCBase.System(NQCBase.convert_from_ase_atoms(a)...)")
     py = Main.eval("py(a) = PythonCall.Py(a)")
     ustrip = Main.eval("ustrip(a) = Unitful.ustrip.(a)")
 
