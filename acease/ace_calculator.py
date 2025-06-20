@@ -4,7 +4,12 @@ from ase.constraints import voigt_6_to_full_3x3_stress, full_3x3_to_voigt_6_stre
 
 from julia.api import Julia
 
+# Initialize PyJulia safely
+jl = Julia(compiled_modules=False)
+
+# Only import Main *after* initializing
 from julia import Main
+
 
 def initialize_julia(python_path):
     global pyconv, py, ustrip, potential_energy, forces, virial
@@ -13,7 +18,7 @@ def initialize_julia(python_path):
     Main.eval("ENV[\"JULIA_CONDAPKG_BACKEND\"] = \"Null\"")
     Main.eval(f'ENV["JULIA_PYTHONCALL_EXE"] = "{python_path}"')
 
-    Main.eval("using PythonCall")
+    # Main.eval("using PythonCall")
     Main.eval("import NQCBase")
     Main.eval("using AtomsCalculators")
     Main.eval("using AtomsBase")
@@ -23,7 +28,7 @@ def initialize_julia(python_path):
 
     # pyconv = Main.eval("pyconv(a) = ASEconvert.ase_to_system(a)")
     pyconv = Main.eval("pyconv(a) = NQCBase.System(NQCBase.convert_from_ase_atoms(a)...)")
-    py = Main.eval("py(a) = PythonCall.Py(a)")
+    # py = Main.eval("py(a) = PythonCall.Py(a)")
     ustrip = Main.eval("ustrip(a) = Unitful.ustrip.(a)")
 
 def ACEpotentials(potname):
