@@ -20,6 +20,6 @@ python -c "import julia; julia.install()"
 ```
 
 To use specific Julia environment, use this command before running the script:
-'''sh
+```sh
 export JULIA_PROJECT=/path/to/julia/environment
-'''
+```
