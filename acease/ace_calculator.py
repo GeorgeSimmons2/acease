@@ -42,9 +42,8 @@ def ACEpotentials(potname):
 
 # Lets you change the parameters of the model without having to reload entirely new model
 def set_params(calc, params):
-    calc  = set_linear_parameters(calc.ace_calculator, params)
-    model = ACEpotentialsCalculator("ace_model")
-    return model
+    set_linear_parameters(calc.ace_calculator, params)
+    return calc
 
 class ACEpotentialsCalculator(Calculator):
     """
