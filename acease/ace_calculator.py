@@ -23,6 +23,8 @@ def initialize_julia(python_path):
     Main.eval("using AtomsCalculators")
     Main.eval("using AtomsBase")
     Main.eval("using Unitful")
+    Main.eval("using ACEpotentials.Models: set_linear_parameters!")
+    Main.eval("set_params(model, params) = ACEpotentials.Models.set_linear_parameters!(model, params)") # Overloading to avoid ! syntax issues with Python
 
     from julia.AtomsCalculators import potential_energy, forces, virial
 
@@ -38,6 +40,10 @@ def ACEpotentials(potname):
     model = ACEpotentialsCalculator("ace_model")
     return model
 
+# Lets you change the parameters of the model without having to reload entirely new model
+def set_params(calc, params):
+    set_linear_parameters(calc.ace_calculator, params)
+    return calc
 
 class ACEpotentialsCalculator(Calculator):
     """
