@@ -24,7 +24,7 @@ def initialize_julia(python_path):
     Main.eval("using AtomsBase")
     Main.eval("using Unitful")
     Main.eval("using ACEpotentials.Models: set_linear_parameters!")
-    Main.eval("set_params(model, params) = ACEpotentials.Models.set_linear_parameters!(model, params)") # Overloading to avoid ! syntax issues with Python
+    Main.eval("set_params(model, params) = set_linear_parameters!(model, params)") # Overloading to avoid ! syntax issues with Python
 
     from julia.AtomsCalculators import potential_energy, forces, virial
 
